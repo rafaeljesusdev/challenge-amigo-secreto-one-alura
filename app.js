@@ -2,26 +2,31 @@ let amigos = []
 
 function validarEntradaInput() {
     let amigo = document.querySelector("input").value;
-    if (amigo.trim() == ""){
-        alert("Digite um nome por favor");
+    if (amigo == ""){
+        alertaAddNome();
     }else{
         amigos.push(amigo.trim());
-        limparCampo();
-        criarHTMLLi(amigo);
+        limparCampo("amigo");
+        criarHTMLLi();
     }
 }
-   
+
 function adicionarAmigo(){
     validarEntradaInput();
-    console.log(amigos);
+    limparCampo("resultado");
 }
 
-function limparCampo(){
-    limpar = document.querySelector("input");
-    limpar.value = "";
+function limparCampo(tag){
+    if(tag == "input" || tag == "resultado" || tag == "listaAmigos"){
+        limpar = document.getElementById(tag);
+        limpar.innerHTML = "";
+    }else{
+        limpar = document.getElementById(tag);
+        limpar.value = "";
+    }
 }
 
-function criarHTMLLi(amigo) {
+function criarHTMLLi() {
     let lista = document.getElementById('listaAmigos');
     lista.innerHTML = ""
     for (i = 0; i < amigos.length; ++i) {
@@ -29,4 +34,21 @@ function criarHTMLLi(amigo) {
         liTag.innerText = amigos[i];
         lista.appendChild(liTag);
     }
+}
+
+function sortearAmigo() {
+    if(amigos.length != 0){
+        let indice = Math.floor(Math.random() * amigos.length);
+        let amigoVencedor = amigos[indice];
+        limparCampo("listaAmigos")
+        amigos = [];
+        let mostrarVencedor = document.getElementById("resultado");
+        mostrarVencedor.innerHTML = amigoVencedor;
+    }else{
+        alertaAddNome()
+    }
+}
+
+function alertaAddNome() {
+    alert("Digite um nome por favor");
 }
