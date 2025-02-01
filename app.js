@@ -2,7 +2,7 @@ let amigos = []
 
 function validarEntradaInput() {
     let amigo = document.querySelector("input").value;
-    if (amigo == ""){
+    if (amigo.trim() == ""){
         alertaAddNome();
     }else{
         amigos.push(amigo.trim());
@@ -17,7 +17,7 @@ function adicionarAmigo(){
 }
 
 function limparCampo(tag){
-    if(tag == "input" || tag == "resultado" || tag == "listaAmigos"){
+    if(tag == "resultado" || tag == "listaAmigos"){
         limpar = document.getElementById(tag);
         limpar.innerHTML = "";
     }else{
@@ -42,8 +42,9 @@ function sortearAmigo() {
         let amigoVencedor = amigos[indice];
         limparCampo("listaAmigos")
         amigos = [];
+        let mensagemVencedor = `Parabéns, o amigo secreto é: ${amigoVencedor}`;
         let mostrarVencedor = document.getElementById("resultado");
-        mostrarVencedor.innerHTML = amigoVencedor;
+        mostrarVencedor.innerHTML = (mensagemVencedor);
     }else{
         alertaAddNome()
     }
