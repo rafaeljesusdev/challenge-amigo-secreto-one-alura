@@ -1,11 +1,11 @@
 let amigos = []
 
 function validarEntradaInput() {
-    let amigo = document.querySelector("input").value;
-    if (amigo.trim() == ""){
+    let amigo = document.querySelector("input").value.trim();
+    if (amigo == ""){
         alertaAddNome();
     }else{
-        amigos.push(amigo.trim());
+        amigos.push(amigo);
         limparCampo("amigo");
         criarHTMLLi();
     }
@@ -17,11 +17,13 @@ function adicionarAmigo(){
 }
 
 function limparCampo(tag){
+
+    const limpar = document.getElementById(tag);
     if(tag == "resultado" || tag == "listaAmigos"){
-        limpar = document.getElementById(tag);
+
         limpar.innerHTML = "";
     }else{
-        limpar = document.getElementById(tag);
+
         limpar.value = "";
     }
 }
@@ -29,7 +31,7 @@ function limparCampo(tag){
 function criarHTMLLi() {
     let lista = document.getElementById('listaAmigos');
     lista.innerHTML = ""
-    for (i = 0; i < amigos.length; ++i) {
+    for (let i = 0; i < amigos.length; ++i) {
         let liTag = document.createElement('li');
         liTag.innerText = amigos[i];
         lista.appendChild(liTag);
